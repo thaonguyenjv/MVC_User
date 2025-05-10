@@ -3,6 +3,7 @@ require_once "controllers/usercontroller.php";
 
 $controller = new UserController();
 
+// Phân tích tham số URL để xác định action
 if (isset($_GET['action'])) {
     $action = $_GET['action'];
     

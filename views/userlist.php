@@ -125,6 +125,7 @@
             const searchButton = document.getElementById('search-button');
             const userList = document.getElementById('user-list');
             
+            // Xử lý sự kiện tìm kiếm
             searchButton.addEventListener('click', function() {
                 searchUsers();
             });
@@ -135,16 +136,17 @@
                 }
             });
             
+            // Hàm tìm kiếm sử dụng AJAX
             function searchUsers() {
                 const keyword = searchInput.value.trim();
                 if (keyword.length === 0) {
                     return;
                 }
                 
-                fetch(`index.php?action=search&keyword=${encodeURIComponent(keyword)}`)
+                fetch(`index.php?action=search&keyword=${encodeURIComponent(keyword)}`) //ajax call to search users
                     .then(response => response.json())
                     .then(data => {
-                        // Update table with search results
+                        // Cập nhật bảng với kết quả tìm kiếm
                         const tbody = userList.querySelector('tbody');
                         tbody.innerHTML = '';
                         
@@ -159,7 +161,7 @@
                                 tbody.appendChild(row);
                             });
                             
-                            // Re-attach event listeners to the new elements
+                            // Gắn lại event listeners cho các phần tử mới
                             attachUserUrlEventListeners();
                         } else {
                             const row = document.createElement('tr');
@@ -170,16 +172,17 @@
                     .catch(error => console.error('Error:', error));
             }
             
-            // User details on URL click
+            // Xử lý sự kiện click vào URL người dùng
             function attachUserUrlEventListeners() {
                 const userUrls = document.querySelectorAll('.user-url');
                 const userDetails = document.getElementById('user-details');
                 
                 userUrls.forEach(link => {
                     link.addEventListener('click', function(e) {
-                        e.preventDefault();
+                        e.preventDefault(); // Ngăn hành vi mặc định của liên kết
                         const userId = this.getAttribute('data-id');
                         
+                         // AJAX call để lấy chi tiết người dùng
                         fetch(`index.php?action=detail&id=${userId}`)
                             .then(response => response.json())
                             .then(data => {
@@ -196,7 +199,7 @@
                 });
             }
             
-            // Initialize event listeners
+             // Khởi tạo event 
             attachUserUrlEventListeners();
         });
     </script>

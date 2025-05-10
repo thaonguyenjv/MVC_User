@@ -27,6 +27,6 @@
     </div>
     
     <div id="user-details" class="user-details">
-        <!-- User details will be loaded here via AJAX -->
+        <!-- chi tiết người dùng hiện ở đây với ajax -->
     </div>
 </div>
